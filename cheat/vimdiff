@@ -1,0 +1,20 @@
+# Diff remote file (Ctrl-w switches between viewports)
+vimdiff /path/to/file scp://remotehost//path/to/file
+
+# Jump to the next change.
+]c
+
+# Jump to the previous change.
+[c
+
+# Get changes from other window into the current window.
+do
+
+# Put the changes from current window into the other window.
+dp
+
+# Case insensitive
+:set diffopt+=icase
+
+# Recalculate diffs
+:diffupdate (or :diffu)

@@ -1,0 +1,3 @@
+UnicodeDecodeError: 'ascii' codec can't decode byte 0x92 in position 152: ordinal not in range(128).
+
+wbk = xlwt.Workbook('utf-8')

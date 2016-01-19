@@ -1,0 +1,40 @@
+# To view the php version:
+php -v
+
+# To view the installed php modules:
+php -m
+
+# To view phpinfo() information:
+php -i
+
+# To lint a php file:
+php -l file.php
+
+# To lint all php files within the cwd:
+find . -name "*.php" -print0 | xargs -0 -n1 -P8 php -l
+
+# To enter an interactive shell:
+php -a
+
+# To locate the system's php.ini files:
+php -i | grep "php.ini"
+
+# To start a local webserver for the cwd on port 3000 (requires php >= 5.4):
+php -S localhost:3000
+
+# REPL
+psysh
+
+# Filtering
+# filter_has_var — Checks if variable of specified type exists
+if ( !filter_has_var(INPUT_GET, 'email') ) {
+  echo "Email Not Found";
+} else {
+  echo "Email Found";
+}
+
+# filter_input — Gets a specific external variable by name and optionally filters it
+$search_url = filter_input(INPUT_GET, 'search', FILTER_SANITIZE_ENCODED);
+
+# filter_input_array — Gets external variables and optionally filters them
+$myinputs = filter_input_array(INPUT_POST, $arr_of_fields_to_filters);

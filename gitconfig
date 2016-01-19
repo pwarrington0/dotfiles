@@ -1,0 +1,19 @@
+[user]
+  name = Peter Warrington
+  email = pwarrington0@gmail.com
+[core]
+  editor = vim
+  autocrlf = input
+[merge]
+  tool = vimdiff
+[color]
+  ui = true
+[alias]
+  co = checkout
+  br = branch
+  ci = commit
+  st = status
+  unstage = reset HEAD --
+  last = log -1 HEAD
+  sto = "!git fetch origin; git diff --name-status origin/master"
+  stov = "!git fetch origin; git log --name-only ..origin/master"
