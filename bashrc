@@ -28,40 +28,24 @@ alias xml='xmlstarlet'
 alias xmlpp='xmlstarlet format --indent-tab'
 
 # Functions
-#if [[ -n "${SSH_TTY}" ]] && [[ -z "${STY}" ]]; then
-# screen -xRR
-#fi
+## Tools
+function _cheat_autocomplete {
+    sheets=$(cheat -l | cut -d' ' -f1)
+    COMPREPLY=()
+    if [ $COMP_CWORD = 1 ]; then
+    COMPREPLY=(`compgen -W "$sheets" -- $2`)
+    fi
+}
+
+complete -F _cheat_autocomplete cheat
+complete -F _todo t
+
+## Misc
 
 # i-search Ctrl+s
 stty -ixon
 
-# http://lifehacker.com/5535495/create-and-change-to-a-new-directory-in-one-command
-mkcd () {
-mkdir -p "$*"
-cd "$*"
-}
-
-# http://www.linuxjournal.com/content/tech-tip-extract-pages-pdf 
-function pdfpextr()
-{
-    # this function uses 3 arguments:
-    #     $1 is the first page of the range to extract
-    #     $2 is the last page of the range to extract
-    #     $3 is the input file
-    #     output file will be named "inputfile_pXX-pYY.pdf"
-    gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER \
-       -dFirstPage=${1} \
-       -dLastPage=${2} \
-       -sOutputFile=${3%.pdf}_p${1}-p${2}.pdf \
-       ${3}
-}
-
-function pdf-nocover()
-{
-    pdftk ${1} cat 2-end output ${1}.nocoverpage
-    mv ${1}.nocoverpage ${1}
-}
-
+# http://www.commandlinefu.com/commands/view/13193/pretty-print-sql-query-with-python-in-one-line
 function sqlpp()
 {
   echo ${1} | python -c "import sys; import sqlparse; print sqlparse.format(sys.stdin.read(), reindent=True, keyword_case='upper')"
@@ -72,15 +56,5 @@ function cless () {
     pygmentize -f terminal "$1" | less -R
 }
 
-function _cheat_autocomplete {
-    sheets=$(cheat -l | cut -d' ' -f1)
-    COMPREPLY=()
-    if [ $COMP_CWORD = 1 ]; then
-  COMPREPLY=(`compgen -W "$sheets" -- $2`)                                                                                                                                                                         
-    fi
-}
-
+# http://stackoverflow.com/questions/13596531/how-to-search-for-non-ascii-characters-with-bash-tools
 function nonascii() { LANG=C grep --color=always '[^ -~]\+'; }
- 
-complete -F _cheat_autocomplete cheat
-complete -F _todo t
